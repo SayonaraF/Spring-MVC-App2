@@ -5,7 +5,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import ru.broyaka.springcourse.models.Person;
 
-import java.sql.*;
 import java.util.List;
 
 @Component
@@ -38,6 +37,6 @@ public class PersonDAO {
     }
 
     public void delete(int id) {
-        jdbcTemplate.update("DELETE * FROM person WHERE id=?", id);
+        jdbcTemplate.update("DELETE FROM person WHERE id=?", id);
     }
 }

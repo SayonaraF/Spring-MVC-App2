@@ -1,11 +1,12 @@
 package ru.broyaka.springcourse.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -20,10 +21,20 @@ import javax.sql.DataSource;
 
 @Configuration
 @ComponentScan("ru.broyaka.springcourse")
+@PropertySource("classpath:application.properties")
 @EnableWebMvc
 public class SpringConfig implements WebMvcConfigurer {
 
     private final ApplicationContext applicationContext;
+
+    @Value("${driver}")
+    private String driver;
+    @Value("${url}")
+    private String url;
+    @Value("${user}")
+    private String user;
+    @Value("${password}")
+    private String password;
 
     @Autowired
     public SpringConfig(ApplicationContext applicationContext) {
@@ -58,10 +69,10 @@ public class SpringConfig implements WebMvcConfigurer {
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
 
-        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/springmvc_db");
-        dataSource.setUsername("root");
-        dataSource.setPassword("123456");
+        dataSource.setDriverClassName(driver);
+        dataSource.setUrl(url);
+        dataSource.setUsername(user);
+        dataSource.setPassword(password);
 
         return dataSource;
     }
