@@ -11,5 +11,13 @@
 <br/>
 <hr/>
 <a href="/people/new">New person</a>
+<br/>
+<br/>
+<a href="/batch">Batch update</a>
+<br/>
+<br/>
+<form th:method="DELETE" th:action="@{/people}">
+    <input type="submit" value="Delete all"/>
+</form>
 </body>
 </html>
